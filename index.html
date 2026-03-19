@@ -1070,7 +1070,7 @@ input[type=file] { border:1.5px dashed var(--border); padding:10px; border-radiu
     </div>
     <div class="sidebar-nav">
       <div class="nav-section">메인</div>
-      <div class="nav-item active" id="navDashboard" onclick="showPage('dashboard',this)">
+      <div class="nav-item active" id="navDashboard" onclick="closeMobileSidebar();showPage('dashboard',this)">
         <span class="ni">📅</span> 기관 월간 행사
       </div>
       <div class="nav-item" id="navNotice" onclick="showPage('notice',this)">
@@ -4090,6 +4090,7 @@ function loadDashboard() {
 
   // Notices
   const nl = document.getElementById('dashNoticeList');
+  if (!nl) return; // 요소 없으면 종료 (오류 방지)
   const sortedNotices = [...DB.notices].sort((a,b) => b.pin - a.pin || b.id - a.id);
   if (sortedNotices.length === 0) {
     nl.innerHTML = '<div class="empty-state"><div class="icon">📢</div><p>등록된 공지사항이 없습니다.</p></div>';
